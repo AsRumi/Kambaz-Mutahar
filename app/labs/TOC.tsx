@@ -33,8 +33,7 @@ export default function TOC() {
           Chapter 1
         </Link>
       </li>
-      {/* TODO: replace with your name */}
-      <li>Your Name</li>
+      <li>Mohammed Mutahar</li>
     </ul>
   );
 }

@@ -15,26 +15,24 @@ export default function ParagraphTag() {
       </p>
       <p id="wd-p-3">
         This is the second paragraph. Even though there is a deliberate white
-        gap between the paragraph above and this paragraph, by default
-        browsers render them as one contiguous piece of text as shown here on
-        the right.
+        gap between the paragraph above and this paragraph, by default browsers
+        render them as one contiguous piece of text as shown here on the right.
       </p>
       <p id="wd-p-4">
-        This is the third paragraph. Wrap each paragraph with the paragraph
-        tag to tell browsers to render the gaps.
+        This is the third paragraph. Wrap each paragraph with the paragraph tag
+        to tell browsers to render the gaps.
       </p>
       <p id="wd-ai-p">
-        The p tag is a block element, so the browser gives it a margin above
-        and below. That margin is what creates the vertical space between
+        The p tag is a block element, so the browser gives it a margin above and
+        below. That margin is what creates the vertical space between
         paragraphs.
       </p>
-      {/* TODO: replace with your own details */}
       <p id="wd-p-your-1">
-        I am from Your Hometown and I moved to Boston to study at Northeastern.
+        I am from India and I moved to the US to study at Northeastern.
       </p>
       <p id="wd-p-your-2">
-        In this course I hope to learn how to build full stack web
-        applications with Next.js.
+        In this course I hope to learn how to build full stack web applications
+        with Next.js.
       </p>
     </div>
   );

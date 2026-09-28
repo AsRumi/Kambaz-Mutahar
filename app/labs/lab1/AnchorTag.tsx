@@ -12,14 +12,12 @@ export default function AnchorTag() {
         GitHub
       </a>
       <br />
-      {/* TODO: replace with a website you visit often */}
-      <a href="https://news.ycombinator.com" id="wd-your-link">
-        Hacker News
+      <a href="https://www.mohammedmutahar.com" id="wd-your-link">
+        My Portfolio
       </a>
       <br />
-      {/* TODO: replace with your own GitHub username */}
       <a
-        href="https://github.com/your-username"
+        href="https://github.com/AsRumi"
         id="wd-your-github"
         target="_blank"
         rel="noreferrer"

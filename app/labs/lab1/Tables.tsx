@@ -80,7 +80,6 @@ export default function Tables() {
           </tr>
         </tfoot>
       </table>
-      {/* TODO: replace with your own courses */}
       <h5>My Courses This Term</h5>
       <table id="wd-your-table" border={1} width="100%">
         <thead>
@@ -94,21 +93,21 @@ export default function Tables() {
         <tbody>
           <tr>
             <td>CS5610 Web Development</td>
-            <td align="center">Monday</td>
-            <td align="center">6:00pm</td>
-            <td align="right">4</td>
-          </tr>
-          <tr>
-            <td>CS5800 Algorithms</td>
             <td align="center">Tuesday</td>
-            <td align="center">2:50pm</td>
+            <td align="center">6:00pm - 9:00pm</td>
             <td align="right">4</td>
           </tr>
           <tr>
-            <td>CS5200 Database Management</td>
-            <td align="center">Thursday</td>
-            <td align="center">11:45am</td>
+            <td>CS5330 Pattern Recognition and Computer Vision</td>
+            <td align="center">Monday and Thursday</td>
+            <td align="center">11:45am - 1:25pm</td>
             <td align="right">4</td>
+          </tr>
+          <tr>
+            <td>Weekly Movie Night</td>
+            <td align="center">Saturday</td>
+            <td align="center">9:00pm - 11:00pm</td>
+            <td align="right">No credits, only fun</td>
           </tr>
         </tbody>
       </table>

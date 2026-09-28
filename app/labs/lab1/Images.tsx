@@ -29,7 +29,6 @@ export default function Images() {
         width="200px"
       />
       <br />
-      {/* TODO: replace with an image that matters to you */}
       My image:
       <br />
       <img

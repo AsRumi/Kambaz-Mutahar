@@ -62,14 +62,13 @@ export default function HighlightedBoxLab() {
           A second box with different style props wrapping different content.
         </p>
       </HighlightedBox>
-      {/* TODO: replace with your own name and goals */}
       <HighlightedBox
         backgroundColor="#fff3e0"
         borderColor="darkorange"
         borderWidth={4}
         borderRadius={0}
       >
-        <h4>Your Name</h4>
+        <h4>Mohammed Mutahar</h4>
         <ul>
           <li>Learn how to build web pages with HTML and CSS</li>
           <li>Build a full stack application with Next.js</li>

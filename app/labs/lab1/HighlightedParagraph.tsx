@@ -46,9 +46,8 @@ export default function HighlightedParagraphLab() {
         borderWidth="3px"
         borderRadius="0px"
       />
-      {/* TODO: replace with a sentence about you */}
       <HighlightedParagraph
-        text="My hobby is playing cricket on the weekends."
+        text="My hobby is training BJJ on the weekends."
         backgroundColor="#e0f7fa"
         borderColor="teal"
         borderWidth={5}

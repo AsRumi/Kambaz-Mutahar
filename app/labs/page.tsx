@@ -4,8 +4,7 @@ export default function Labs() {
   return (
     <div id="wd-labs">
       <h1>Labs</h1>
-      {/* TODO: replace with your full name and section */}
-      <h3>Your Full Name - CS5610 Section XX</h3>
+      <h3>Mohammed Mutahar - CS5610 Section 09</h3>
       <ul>
         <li>
           <Link href="/labs/lab1">Lab 1: HTML Examples</Link>
@@ -30,9 +29,8 @@ export default function Labs() {
           </Link>
         </li>
       </ul>
-      {/* TODO: replace with your own GitHub repository URL */}
       <a
-        href="https://github.com/your-username/webdev-client"
+        href="https://github.com/AsRumi/"
         id="wd-github"
         target="_blank"
         rel="noreferrer"

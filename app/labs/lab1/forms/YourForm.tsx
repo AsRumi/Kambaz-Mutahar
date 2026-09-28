@@ -1,6 +1,5 @@
 "use client";
 
-// TODO: replace every SAMPLE default below with your own details
 export default function YourForm() {
   return (
     <form
@@ -13,17 +12,17 @@ export default function YourForm() {
 
       <h5>Text Fields</h5>
       <label htmlFor="wd-your-first-name">First name:</label>
-      <input id="wd-your-first-name" type="text" defaultValue="Jane" />
+      <input id="wd-your-first-name" type="text" defaultValue="Mohammed" />
       <br />
       <label htmlFor="wd-your-last-name">Last name:</label>
-      <input id="wd-your-last-name" type="text" defaultValue="Doe" />
+      <input id="wd-your-last-name" type="text" defaultValue="Mutahar" />
       <br />
       <label htmlFor="wd-your-student-id">Student ID:</label>
       <input
         id="wd-your-student-id"
         type="password"
-        placeholder="student ID"
-        defaultValue="001234567"
+        placeholder="Student ID"
+        defaultValue="default"
       />
       <br />
 
@@ -34,7 +33,7 @@ export default function YourForm() {
         id="wd-your-bio"
         cols={40}
         rows={5}
-        defaultValue="SAMPLE: I want to learn how to build full stack web applications."
+        defaultValue="I want to learn more about webdev."
       />
       <br />
 
@@ -108,11 +107,7 @@ export default function YourForm() {
       <br />
       <label htmlFor="wd-your-topics">Topics to deepen this term:</label>
       <br />
-      <select
-        multiple
-        id="wd-your-topics"
-        defaultValue={["REACT", "NEXTJS"]}
-      >
+      <select multiple id="wd-your-topics" defaultValue={["REACT", "NEXTJS"]}>
         <option value="HTML">HTML</option>
         <option value="CSS">CSS</option>
         <option value="REACT">React</option>
