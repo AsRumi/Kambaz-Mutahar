@@ -30,7 +30,7 @@ export default function Labs() {
         </li>
       </ul>
       <a
-        href="https://github.com/AsRumi/"
+        href="https://github.com/AsRumi/Kambaz-Mutahar"
         id="wd-github"
         target="_blank"
         rel="noreferrer"
