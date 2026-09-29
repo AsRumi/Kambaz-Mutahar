@@ -5,7 +5,7 @@ export default function OtherFieldTypes() {
       <label htmlFor="wd-text-fields-email">Email: </label>
       <input
         type="email"
-        placeholder="jdoe@somewhere.com"
+        placeholder="mutahar@somewhere.com"
         id="wd-text-fields-email"
       />
       <br />

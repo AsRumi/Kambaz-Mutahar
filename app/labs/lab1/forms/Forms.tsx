@@ -27,7 +27,6 @@ export default function Forms() {
         <OtherFieldTypes />
         <Buttons />
       </form>
-      {/* YourForm is its own form, so it sits after the sample form (forms cannot be nested) */}
       <YourForm />
     </div>
   );
