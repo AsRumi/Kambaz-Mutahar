@@ -1,19 +1,18 @@
 import { FaUserCircle } from "react-icons/fa";
+import * as db from "../../../../database";
 
-const people = [
-  ["Tony Stark", "001234561S", "S101", "STUDENT", "2020-10-01", "10:21:32"],
-  ["Bruce Wayne", "001234562S", "S101", "STUDENT", "2020-11-02", "23:32:23"],
-  ["Steve Rogers", "001234563S", "S101", "STUDENT", "2020-10-02", "13:21:32"],
-  ["Natasha Romanoff", "001234564S", "S101", "TA", "2020-11-05", "11:22:33"],
-  ["Thor Odinson", "001234565S", "S101", "STUDENT", "2020-12-01", "11:22:33"],
-  ["Bruce Banner", "001234566S", "S101", "STUDENT", "2020-12-01", "22:33:44"],
-  ["Frodo Baggins", "001234567S", "S101", "FACULTY", "2020-12-02", "44:33:22"],
-  ["Jane Sample", "001234570S", "S101", "STUDENT", "2020-12-05", "10:10:10"],
-  ["Alex Sample", "001234571S", "S101", "TA", "2020-12-06", "11:11:11"],
-  ["Sam Sample", "001234572S", "S101", "FACULTY", "2020-12-07", "12:12:12"],
-];
-
-export default function PeopleTable() {
+export default async function PeopleTable({
+  params,
+}: {
+  params: Promise<{ cid: string }>;
+}) {
+  const { cid } = await params;
+  const { users, enrollments } = db;
+  const enrolled = users.filter((usr) =>
+    enrollments.some(
+      (enrollment) => enrollment.user === usr._id && enrollment.course === cid,
+    ),
+  );
   return (
     <div id="wd-people-table" className="overflow-x-auto">
       <table className="w-full border-collapse text-left text-sm">
@@ -28,17 +27,18 @@ export default function PeopleTable() {
           </tr>
         </thead>
         <tbody>
-          {people.map(([name, ...cells]) => (
-            <tr key={name} className="odd:bg-neutral-50">
-              <td className="p-2 text-nowrap">
+          {enrolled.map((user) => (
+            <tr key={user._id} className="odd:bg-neutral-50">
+              <td className="wd-full-name p-2 text-nowrap">
                 <FaUserCircle className="me-2 inline text-4xl text-neutral-500" />
-                {name}
+                <span className="wd-first-name">{user.firstName}</span>{" "}
+                <span className="wd-last-name">{user.lastName}</span>
               </td>
-              {cells.map((cell) => (
-                <td key={cell} className="p-2">
-                  {cell}
-                </td>
-              ))}
+              <td className="wd-login-id p-2">{user.loginId}</td>
+              <td className="wd-section p-2">{user.section}</td>
+              <td className="wd-role p-2">{user.role}</td>
+              <td className="wd-last-activity p-2">{user.lastActivity}</td>
+              <td className="wd-total-activity p-2">{user.totalActivity}</td>
             </tr>
           ))}
         </tbody>

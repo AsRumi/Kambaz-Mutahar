@@ -2,35 +2,35 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function CourseCard({
-  id,
-  title,
-  subtitle,
+  _id,
+  name,
+  description,
   image,
 }: {
-  id: string;
-  title: string;
-  subtitle: string;
+  _id: string;
+  name: string;
+  description: string;
   image: string;
 }) {
   return (
     <div className="wd-dashboard-course w-[300px] max-w-full overflow-hidden rounded border border-neutral-300 bg-white shadow">
       <Link
-        href={`/courses/${id}/home`}
+        href={`/courses/${_id}/home`}
         className="wd-dashboard-course-link block text-neutral-900 no-underline"
       >
         <Image
           src={image}
           width={300}
           height={160}
-          alt={title}
+          alt={name}
           className="h-40 w-full object-cover"
         />
         <div className="p-4">
           <h5 className="m-0 mb-2 truncate text-lg font-semibold whitespace-nowrap">
-            {title}
+            {name}
           </h5>
           <p className="wd-dashboard-course-title m-0 mb-3 h-[100px] overflow-hidden text-neutral-600">
-            {subtitle}
+            {description}
           </p>
           <button
             type="button"
