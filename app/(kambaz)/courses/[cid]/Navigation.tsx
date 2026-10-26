@@ -1,43 +1,48 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import "../../kambaz.css";
+
+const links = [
+  ["Home", "home", "home"],
+  ["Modules", "modules", "modules"],
+  ["Piazza", "piazza", "piazza"],
+  ["Zoom", "zoom", "zoom"],
+  ["Assignments", "assignments", "assignments"],
+  ["Quizzes", "quizzes", "quizzes"],
+  ["Grades", "grades", "grades"],
+  ["People", "people/table", "people"],
+];
 
 export default function CourseNavigation({ cid }: { cid: string }) {
+  const pathname = usePathname() ?? "";
   return (
-    <div id="wd-courses-navigation">
-      <Link href={`/courses/${cid}/home`} id="wd-course-home-link">
-        Home
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/modules`} id="wd-course-modules-link">
-        Modules
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/piazza`} id="wd-course-piazza-link">
-        Piazza
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/zoom`} id="wd-course-zoom-link">
-        Zoom
-      </Link>{" "}
-      <br />
+    <div id="wd-courses-navigation" className="wd list-group rounded-none">
+      {links.map(([label, path, key]) => {
+        const href = `/courses/${cid}/${path}`;
+        const active = pathname === href || pathname.startsWith(href + "/");
+        return (
+          <Link
+            key={key}
+            href={href}
+            id={`wd-course-${key}-link`}
+            className={
+              active
+                ? "list-group-item active border-0"
+                : "list-group-item border-0 text-red-600"
+            }
+          >
+            {label}
+          </Link>
+        );
+      })}
       <Link
-        href={`/courses/${cid}/assignments`}
-        id="wd-course-assignments-link"
+        href={`/courses/${cid}/home`}
+        id="wd-course-ai-link"
+        className="list-group-item border-0 text-red-600"
       >
-        Assignments
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/quizzes`} id="wd-course-quizzes-link">
-        Quizzes
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/grades`} id="wd-course-grades-link">
-        Grades
-      </Link>{" "}
-      <br />
-      <Link href={`/courses/${cid}/people/table`} id="wd-course-people-link">
-        People
-      </Link>{" "}
-      <br />
+        Sample
+      </Link>
     </div>
   );
 }
