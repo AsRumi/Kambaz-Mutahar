@@ -1,16 +1,22 @@
+"use client";
+
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
-import * as db from "../../../database";
+import { useAssignmentsStore } from "../../../store/assignmentsStore";
+import { useAccountContext } from "../../../account/AccountContext";
 
-export default async function Assignments({
-  params,
-}: {
-  params: Promise<{ cid: string }>;
-}) {
-  const { cid } = await params;
-  const assignments = db.assignments.filter(
+export default function Assignments() {
+  const { cid } = useParams();
+  const allAssignments = useAssignmentsStore((state) => state.assignments);
+  const assignments = allAssignments.filter(
     (assignment) => assignment.course === cid,
   );
+  const { currentUser } = useAccountContext();
+  // Students can only view assignments
+  const canEdit = !currentUser || currentUser.role !== "STUDENT";
+
   return (
     <div id="wd-assignments">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
@@ -22,22 +28,24 @@ export default async function Assignments({
             className="rounded border border-neutral-300 py-1.5 pr-3 pl-9 text-sm"
           />
         </div>
-        <div className="flex gap-2">
-          <button
-            id="wd-add-assignment-group"
-            type="button"
-            className="inline-flex items-center gap-1 rounded border border-neutral-300 bg-neutral-100 px-3 py-1.5 text-sm"
-          >
-            <FaPlus /> Group
-          </button>
-          <button
-            id="wd-add-assignment"
-            type="button"
-            className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm text-white"
-          >
-            <FaPlus /> Assignment
-          </button>
-        </div>
+        {canEdit && (
+          <div className="flex gap-2">
+            <button
+              id="wd-add-assignment-group"
+              type="button"
+              className="inline-flex items-center gap-1 rounded border border-neutral-300 bg-neutral-100 px-3 py-1.5 text-sm"
+            >
+              <FaPlus /> Group
+            </button>
+            <Link
+              id="wd-add-assignment"
+              href={`/courses/${cid}/assignments/new`}
+              className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm text-white no-underline"
+            >
+              <FaPlus /> Assignment
+            </Link>
+          </div>
+        )}
       </div>
       <h3
         id="wd-assignments-title"
@@ -55,10 +63,11 @@ export default async function Assignments({
         {assignments.map((assignment) => (
           <AssignmentItem
             key={assignment._id}
-            cid={cid}
+            cid={String(cid)}
             aid={assignment._id}
             title={assignment.title}
             details={`Multiple Modules | Not available until ${assignment.available} | Due ${assignment.due} | ${assignment.points} pts`}
+            canDelete={canEdit}
           />
         ))}
       </ul>
