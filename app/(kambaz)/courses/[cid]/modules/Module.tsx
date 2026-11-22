@@ -1,9 +1,14 @@
 import Lesson from "./Lesson";
 import ModuleControlButtons from "./ModuleControlButtons";
 import { useModulesStore, type CourseModule } from "../../../store/modulesStore";
+import * as client from "../../client";
 
 export default function Module({ module }: { module: CourseModule }) {
   const updateModule = useModulesStore((state) => state.updateModule);
+  const onUpdateModule = async () => {
+    const saved = await client.updateModule({ ...module, editing: false });
+    updateModule(saved);
+  };
   return (
     <li className="wd-module mb-5 overflow-hidden border border-neutral-400 p-0">
       <div className="wd-title flex items-center justify-between bg-neutral-200 p-3 font-semibold">
@@ -14,7 +19,7 @@ export default function Module({ module }: { module: CourseModule }) {
             onChange={(e) => updateModule({ ...module, name: e.target.value })}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                updateModule({ ...module, editing: false });
+                onUpdateModule();
               }
             }}
           />

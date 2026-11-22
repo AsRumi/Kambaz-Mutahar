@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FaFileAlt, FaTrash } from "react-icons/fa";
 import { useAssignmentsStore } from "../../../store/assignmentsStore";
+import * as client from "../../client";
 
 export default function AssignmentItem({
   cid,
@@ -17,9 +18,10 @@ export default function AssignmentItem({
 }) {
   const deleteAssignment = useAssignmentsStore((state) => state.deleteAssignment);
 
-  const removeAssignment = () => {
+  const removeAssignment = async () => {
     const sure = window.confirm("Are you sure you want to remove this assignment?");
     if (sure) {
+      await client.deleteAssignment(aid);
       deleteAssignment(aid);
     }
   };

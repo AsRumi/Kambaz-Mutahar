@@ -5,9 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import { FaAlignJustify } from "react-icons/fa6";
 import CourseNavigation from "./Navigation";
 import Breadcrumb from "./Breadcrumb";
-import { useCoursesStore } from "../../store/coursesStore";
-import { useEnrollmentsStore } from "../../store/enrollmentsStore";
+import { useCoursesStore, type Course } from "../../store/coursesStore";
 import { useAccountContext } from "../../account/AccountContext";
+import * as client from "../client";
 
 export default function CoursesLayout({
   children,
@@ -17,27 +17,22 @@ export default function CoursesLayout({
   const { cid } = useParams();
   const courseId = typeof cid === "string" ? cid : "";
   const courses = useCoursesStore((state) => state.courses);
+  const setCourses = useCoursesStore((state) => state.setCourses);
   const course = courses.find((c) => c._id === courseId);
   const [showCourseNav, setShowCourseNav] = useState(true);
-  const enrollments = useEnrollmentsStore((state) => state.enrollments);
   const { currentUser } = useAccountContext();
   const router = useRouter();
 
-  // Only signed in users are checked. Signed out visitors can open any course.
-  let allowed = true;
-  if (currentUser) {
-    allowed = enrollments.some(
-      (e) => e.user === currentUser._id && e.course === courseId,
-    );
-  }
-
   useEffect(() => {
-    if (!allowed) {
-      router.push("/dashboard");
+    client.fetchAllCourses().then(setCourses);
+    if (currentUser) {
+      client.findMyCourses().then((myCourses: Course[]) => {
+        if (!myCourses.some((c) => c._id === courseId)) {
+          router.push("/dashboard");
+        }
+      });
     }
-  }, [allowed, router]);
-
-  if (!allowed) return null;
+  }, [currentUser, courseId, router, setCourses]);
 
   return (
     <div id="wd-courses">

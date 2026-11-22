@@ -37,6 +37,26 @@ export default function Labs() {
       >
         GitHub repository
       </a>
+      <br />
+      <a
+        href="https://github.com/AsRumi/webdev-server"
+        id="wd-server-github"
+        target="_blank"
+        rel="noreferrer"
+        className="text-blue-700 underline"
+      >
+        Server GitHub repository
+      </a>
+      <br />
+      <a
+        href={process.env.NEXT_PUBLIC_HTTP_SERVER}
+        id="wd-server-url"
+        target="_blank"
+        rel="noreferrer"
+        className="text-blue-700 underline"
+      >
+        Deployed server (Render)
+      </a>
     </div>
   );
 }

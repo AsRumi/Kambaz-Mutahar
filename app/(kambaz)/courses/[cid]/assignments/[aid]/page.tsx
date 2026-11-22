@@ -8,6 +8,7 @@ import {
   useAssignmentsStore,
   type Assignment,
 } from "../../../../store/assignmentsStore";
+import * as client from "../../../client";
 
 const entryOptions = [
   ["wd-text-entry", "Text Entry"],
@@ -37,11 +38,13 @@ export default function AssignmentEditor() {
   }
   const [assignment, setAssignment] = useState<Assignment>(start);
 
-  const save = () => {
+  const save = async () => {
     if (isNew) {
-      addAssignment({ ...assignment, course: String(cid) });
+      const created = await client.createAssignmentForCourse(String(cid), assignment);
+      addAssignment(created);
     } else {
-      updateAssignment(assignment);
+      const saved = await client.updateAssignment(assignment);
+      updateAssignment(saved);
     }
     router.push(`/courses/${cid}/assignments`);
   };

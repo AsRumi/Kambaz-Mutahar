@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAccountContext } from "../AccountContext";
+import * as client from "../client";
 
 const input =
   "mb-2 w-full rounded border border-neutral-300 px-3 py-2";
@@ -14,22 +15,15 @@ export default function Signup() {
   const { setCurrentUser } = useAccountContext();
   const router = useRouter();
 
-  const signup = () => {
+  const signup = async () => {
     if (!username || !password) return;
-    setCurrentUser({
-      _id: crypto.randomUUID(),
-      username,
-      password,
-      firstName: "",
-      lastName: "",
-      email: "",
-      role: "STUDENT",
-      loginId: "",
-      section: "",
-      lastActivity: "",
-      totalActivity: "",
-    });
-    router.push("/account/profile");
+    try {
+      const current = await client.signup({ username, password });
+      setCurrentUser(current);
+      router.push("/account/profile");
+    } catch {
+      return;
+    }
   };
 
   return (

@@ -1,20 +1,22 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
 import { useAssignmentsStore } from "../../../store/assignmentsStore";
 import { useAccountContext } from "../../../account/AccountContext";
+import * as client from "../../client";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const allAssignments = useAssignmentsStore((state) => state.assignments);
-  const assignments = allAssignments.filter(
-    (assignment) => assignment.course === cid,
-  );
+  const assignments = useAssignmentsStore((state) => state.assignments);
+  const setAssignments = useAssignmentsStore((state) => state.setAssignments);
+  useEffect(() => {
+    client.findAssignmentsForCourse(String(cid)).then(setAssignments);
+  }, [cid, setAssignments]);
   const { currentUser } = useAccountContext();
-  // Students can only view assignments
   const canEdit = !currentUser || currentUser.role !== "STUDENT";
 
   return (

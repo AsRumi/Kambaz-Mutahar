@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAccountContext, type User } from "../AccountContext";
+import * as client from "../client";
 
 const input =
   "mb-2 w-full rounded border border-neutral-300 px-3 py-2";
@@ -18,11 +19,14 @@ export default function Profile() {
     }
   }, [currentUser, router]);
 
-  const update = () => {
-    setCurrentUser(profile);
+  const update = async () => {
+    if (!profile) return;
+    const user = await client.updateUser(profile);
+    setCurrentUser(user);
   };
 
-  const signout = () => {
+  const signout = async () => {
+    await client.signout();
     setCurrentUser(null);
     router.push("/account/signin");
   };

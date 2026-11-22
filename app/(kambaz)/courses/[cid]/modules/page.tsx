@@ -1,14 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import Module from "./Module";
 import ModulesControls from "./ModulesControls";
 import { useModulesStore } from "../../../store/modulesStore";
+import * as client from "../../client";
 
 export default function Modules() {
   const { cid } = useParams();
-  const allModules = useModulesStore((state) => state.modules);
-  const modules = allModules.filter((module) => module.course === cid);
+  const modules = useModulesStore((state) => state.modules);
+  const setModules = useModulesStore((state) => state.setModules);
+  useEffect(() => {
+    client.findModulesForCourse(String(cid)).then(setModules);
+  }, [cid, setModules]);
   return (
     <div>
       <ModulesControls />
